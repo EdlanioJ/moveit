@@ -21,7 +21,6 @@ import styles from '../styles/pages/Home.module.css';
 import api from '../utils/api';
 import dbConnect from '../utils/dbConnect';
 import { ChallengeResponse } from './api/challenge';
-import { UserResponse } from './api/user/[id]';
 
 interface UserProps {
   id: string;
