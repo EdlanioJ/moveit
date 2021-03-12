@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getScreenshot } from './_lib/chromium';
-import getThumbTemplate from './_lib/thumbTemplate';
+import { getScreenshot } from '../../lib/chromium';
+import getThumbTemplate from '../../lib/thumbTemplate';
 
 const isDev = !process.env.AWS_REGION;
 
