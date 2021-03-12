@@ -8,8 +8,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const query = req.query;
 
-    console.info(query);
-
     const level = Number(query.level);
     const completedChallenge = Number(query.completedChallenge);
     const totalExperience = Number(query.totalExperience);

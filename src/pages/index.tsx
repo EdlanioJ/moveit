@@ -66,14 +66,13 @@ export default Home;
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { req, res } = ctx;
 
-  const { 'next-auth.session-token': sessionToken } = req.cookies;
-
   const { level, currentExperience, challengeCompleted } = ctx.req.cookies;
   const session = await getSession({ req });
 
   if (!session) {
+    res.writeHead(302, { Location: '/login' });
+    res.end();
     return {
-      redirect: { statusCode: 302, destination: '/login' },
       props: {},
     };
   }
@@ -105,8 +104,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       },
     };
   } catch (error) {
+    res.writeHead(302, { Location: '/leaderboard' });
+    res.end();
     return {
-      redirect: { statusCode: 302, destination: '/leaderboard' },
       props: {},
     };
   }

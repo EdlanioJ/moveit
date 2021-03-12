@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^10.0.8",
     "axios": "^0.21.1",
     "chrome-aws-lambda": "7.0.0",
     "framer-motion": "^3.7.0",

@@ -38,8 +38,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession({ req });
 
   if (!!session) {
+    res.writeHead(302, { Location: '/' });
+    res.end();
     return {
-      redirect: { statusCode: 301, destination: '/' },
       props: {},
     };
   }
