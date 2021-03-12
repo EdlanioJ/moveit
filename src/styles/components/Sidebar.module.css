@@ -1,0 +1,72 @@
+.container {
+  width: 5rem;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: linear-gradient(var(--white), rgba(0,0,0,0.05));
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
+}
+
+.container a {
+  width: 3rem;
+  height: 3rem;
+  align-self: center;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+.container div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container div a {
+  background: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+  height: 4rem;
+}
+
+.container button {
+  width: 5rem;
+  height: 5rem;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.container div a + a {
+  margin-top: 0.5rem;
+}
+
+.container button:hover svg {
+  fill: var(--blue-dark);
+}
+
+a.active button {
+  color: var(--blue-dark);
+  background: var(--blue-dark);
+}
+a.active::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  width: 0.25rem;
+  height: 2.5rem;
+
+  align-self: center;
+  background: var(--blue-dark);
+  border-radius: 0 5px 5px 0  ;
+}
+
+

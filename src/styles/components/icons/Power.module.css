@@ -1,0 +1,6 @@
+.container {
+  width: 2rem;
+  height: 2rem;
+  fill: var(--text);
+  transition: fill 0.02s;
+}

@@ -1,0 +1,18 @@
+.main {
+  display: flex;
+}
+
+.container {
+  flex: 1;
+  height: 100vh;
+  max-width: 992px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+.container h1{
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--title);
+  margin: 1.5rem 0 1rem;
+}
