@@ -1,4 +1,4 @@
-import { ChallengeResponse } from '../pages/api/challenge';
+import { ChallengeResponse } from '../pages/api/challenge/[id]';
 import styles from '../styles/components/ScoreList.module.css';
 
 interface ScoreListProps {

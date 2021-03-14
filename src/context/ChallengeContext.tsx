@@ -2,8 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 import challenges from '../../challenges.json';
 import LevelUpModal from '../components/LevelUpModal';
-import api from '../utils/api';
-import { ChallengeResponse } from '../pages/api/challenge';
+import { ChallengeResponse } from '../pages/api/challenge/[id]';
 
 interface ChallengeProps {
   type: 'body' | 'eye';
@@ -25,22 +24,13 @@ interface ChallengeContextData {
 
 const ChallengeContext = createContext({} as ChallengeContextData);
 
-export interface ChallengeResultProps {
-  id: string;
-  level: number;
-  currentExperience: number;
-  challengeCompleted: number;
-}
-
 interface ChallengeProviderProps {
-  sessionToken: string;
-  challenge: ChallengeResultProps;
+  challenge: ChallengeResponse;
 }
 
 export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({
   children,
   challenge,
-  sessionToken,
 }) => {
   const [level, setLevel] = useState(challenge.level);
   const [currentExperience, setCurrentExperience] = useState(
@@ -48,6 +38,9 @@ export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({
   );
   const [challengeCompleted, setChallengeCompleted] = useState(
     challenge.challengeCompleted
+  );
+  const [totalExperience, setTotalExperience] = useState(
+    challenge.totalExperience
   );
   const [activeChallenge, setActiveChallenge] = useState(null);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
@@ -62,12 +55,11 @@ export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({
     try {
       setLevel(level + 1);
       setIsLevelUpModalOpen(true);
-
-      const updatedChallenge = await api.put<ChallengeResponse>(
-        `/api/challenge/${challenge.id}`,
-        { level: level + 1 },
-        { headers: { cookie: `next-auth.session-token=${sessionToken}` } }
-      );
+      await fetch(`/api/challenge/${challenge.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ level: level + 1 }),
+        headers: { 'Content-Type': 'application/json' },
+      });
     } catch (err) {
       console.log(err);
     }
@@ -91,7 +83,7 @@ export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({
 
     if (Notification.permission === 'granted') {
       new Notification('Novo desafio :)', {
-        body: `valendo ${challenge.amount}xp!`,
+        body: `valendo ${challenge.amount} xp!`,
       });
     }
   }
@@ -112,31 +104,22 @@ export const ChallengeProvider: React.FC<ChallengeProviderProps> = ({
         await levelUp();
       }
 
-      const getChallengeRes = await api.get<ChallengeResponse>(
-        `/api/challenge/${challenge.id}`,
-        {
-          headers: { cookie: `next-auth.session-token=${sessionToken}` },
-        }
-      );
-
       setCurrentExperience(finalExperience);
 
       setActiveChallenge(null);
       setChallengeCompleted(challengeCompleted + 1);
 
-      const { data } = getChallengeRes;
+      setTotalExperience(totalExperience + amount);
 
-      const totalExperience = amount + data.totalExperience;
-
-      await api.put<ChallengeResponse>(
-        `/api/challenge/${challenge.id}`,
-        {
-          totalExperience: totalExperience,
+      await fetch(`/api/challenge/${challenge.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          totalExperience: totalExperience + amount,
           currentExperience: finalExperience,
           challengeCompleted: challengeCompleted + 1,
-        },
-        { headers: { cookie: `next-auth.session-token=${sessionToken}` } }
-      );
+        }),
+        headers: { 'Content-Type': 'application/json' },
+      });
     } catch (err) {
       console.log(err);
     }
