@@ -1,0 +1,35 @@
+version: '3'
+
+services: 
+  app:
+    build: .
+    entrypoint: .docker/entrypoint.sh
+    container_name: moveit
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/node/app
+    depends_on:
+      - mongo-moveit
+    networks: 
+      - moveit-network
+
+  mongo-moveit:
+    image: bitnami/mongodb:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'mongodb_data:/bitnami/mongodb'
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - moveit-network
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks: 
+  moveit-network:
+    driver: bridge
