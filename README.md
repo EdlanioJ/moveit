@@ -47,10 +47,10 @@ First, clone the repository:
   cd moveit
 ```
 
-After, create the Google oauth app and the Github oauth app, follow instructions on the links below:
+After, create the Google  OAuth credentials and the Github OAuth App, follow instructions on the links below:
 
-- [Google oauth app Video](https://www.youtube.com/watch?v=xH6hAW3EqLk)
-- [Github oauth app Video](https://www.youtube.com/watch?v=R9lxXQcy-nM)
+- [Creating Google  OAuth Credentials Video](https://www.youtube.com/watch?v=xH6hAW3EqLk)
+- [Creating Github OAuth App Video](https://www.youtube.com/watch?v=R9lxXQcy-nM)
 
 Then create a file ```.env.local``` with variables inside the [.env.example](.env.example) and fill all variables.
 
@@ -62,9 +62,9 @@ Run:
   docker-compose up -d
 ```
 
-Don't using Docker
+Not using Docker
 
-Create your mongo database and replace ```MONGODB_URI``` inside ```.env.local``` with your database link.
+Create your mongo database and replace ```MONGODB_URI``` value inside ```.env.local``` with your database link.
 
 Run:
 ```bash
