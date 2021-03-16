@@ -9,6 +9,19 @@ const Login: NextPage = () => {
     <div className={styles.overlay}>
       <Head>
         <title>Login | move.it</title>
+        <meta property="og:title" content="Move.it" />
+        <meta
+          property="og:description"
+          content="Um app para ajudar você a trabalhar de forma sábia e com mais saúde"
+        />
+        <meta property="og:type" content="activity" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Move.it" />
+        <meta
+          name="twitter:description"
+          content="Um app para ajudar você a trabalhar de forma sábia e com mais saúde"
+        />
       </Head>
       <div className={styles.container}>
         <section>
