@@ -15,7 +15,7 @@
 
 </br>
 <p align="center">
-<img src=".github/home.png" alt="Moveit Home" width="100%" />
+<img src=".github/moveit.gif" alt="Moveit Home" width="100%" />
 </p>
 </br>
 
